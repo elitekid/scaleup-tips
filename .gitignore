@@ -1,0 +1,182 @@
+# Python 바이트코드 및 캐시
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# 배포용 파일
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# 가상환경
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+.env/
+
+# 환경변수 파일 (선별적 제외)
+.env
+.env.local
+.env.personal
+.env.staging
+.env.production
+
+# 팀 공유 개발 환경은 포함
+!.env.develop
+!.env.development
+!.env.test
+
+# 템플릿 파일은 포함
+!.env.example
+!.env.template
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# poetry
+poetry.lock
+
+# celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# 테스트 커버리지
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# IDE 관련
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+
+# 로그 파일
+*.log
+logs/
+log/
+
+# 데이터베이스
+*.db
+*.sqlite
+*.sqlite3
+
+# 임시 파일
+*.tmp
+*.temp
+tmp/
+temp/
+
+# 설정 파일 (프로젝트별 조정 필요)
+config.ini
+settings.ini
+*.cfg
+
+# 업로드된 파일
+uploads/
+media/
+static/collected/
+
+# 백업 파일
+*.bak
+*.backup
+
+# 압축 파일 (일반적으로 제외)
+*.zip
+*.tar.gz
+*.rar
+
+# 문서 빌드
+docs/_build/
+docs/build/
+
+# FastAPI/Flask 관련
+instance/
+.webassets-cache
+
+# Django 관련
+local_settings.py
+db.sqlite3
+staticfiles/
+
+# 기타 Python 도구
+.spyderproject
+.spyproject
+.ropeproject
+.mr.developer.cfg
+.project
+.pydevproject
+
+# 개발 도구
+.pre-commit-config.yaml.bak
