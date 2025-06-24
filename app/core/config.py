@@ -16,35 +16,39 @@ else:
 
 class Settings(BaseSettings):
     # 환경 설정
-    ENVIRONMENT: str
-    DEBUG: bool = False
+    ENVIRONMENT: str = os.getenv("ENVIRONMENT")
+    DEBUG: bool = os.getenv("DEBUG", "False").lower() == "true"
     
     # 데이터베이스 설정
-    DATABASE_URL: str
-    DATABASE_POOL_SIZE: int
-    DATABASE_MAX_OVERFLOW: int
+    DATABASE_URL: str = os.getenv("DATABASE_URL")
+    DATABASE_POOL_SIZE: int = int(os.getenv("DATABASE_POOL_SIZE"))
+    DATABASE_MAX_OVERFLOW: int = int(os.getenv("DATABASE_MAX_OVERFLOW"))
     
-    # 보안 설정 - 문자열로 받고 property로 변환
-    ALLOWED_HOSTS: str
-    ALLOWED_ORIGINS: str
+    # 보안 설정 - 수동으로 파싱
+    _allowed_hosts: str = os.getenv("ALLOWED_HOSTS")
+    _allowed_origins: str = os.getenv("ALLOWED_ORIGINS")
+    
+    @property
+    def ALLOWED_HOSTS(self) -> List[str]:
+        """쉼표로 구분된 문자열을 리스트로 변환"""
+        if self._allowed_hosts:
+            return [host.strip() for host in self._allowed_hosts.split(",")]
+        return []
+    
+    @property
+    def ALLOWED_ORIGINS(self) -> List[str]:
+        """쉼표로 구분된 문자열을 리스트로 변환"""
+        if self._allowed_origins:
+            return [origin.strip() for origin in self._allowed_origins.split(",")]
+        return []
     
     # API 설정
     API_PREFIX: str = "/api/v1"
-    MAX_RECOMMENDATION_LIMIT: int
-    DEFAULT_RECOMMENDATION_LIMIT: int
+    MAX_RECOMMENDATION_LIMIT: int = int(os.getenv("MAX_RECOMMENDATION_LIMIT"))
+    DEFAULT_RECOMMENDATION_LIMIT: int = int(os.getenv("DEFAULT_RECOMMENDATION_LIMIT"))
     
     # 로깅 설정
-    LOG_LEVEL: str
-    
-    @property
-    def allowed_hosts_list(self) -> List[str]:
-        """ALLOWED_HOSTS를 리스트로 변환"""
-        return [host.strip() for host in self.ALLOWED_HOSTS.split(",")]
-    
-    @property
-    def allowed_origins_list(self) -> List[str]:
-        """ALLOWED_ORIGINS를 리스트로 변환"""
-        return [origin.strip() for origin in self.ALLOWED_ORIGINS.split(",")]
+    LOG_LEVEL: str = os.getenv("LOG_LEVEL")
     
     class Config:
         case_sensitive = True
@@ -54,8 +58,8 @@ class Settings(BaseSettings):
         current_env = os.getenv("ENV", "local")
         print(f"설정 로드 완료: ENV={current_env}, ENVIRONMENT={self.ENVIRONMENT}")
         print(f"DATABASE_URL={self.DATABASE_URL}")
-        print(f"ALLOWED_HOSTS={self.allowed_hosts_list}")
-        print(f"ALLOWED_ORIGINS={self.allowed_origins_list}")
+        print(f"ALLOWED_HOSTS={self.ALLOWED_HOSTS}")
+        print(f"ALLOWED_ORIGINS={self.ALLOWED_ORIGINS}")
         print(f"LOG_LEVEL={self.LOG_LEVEL}")
 
 settings = Settings()
