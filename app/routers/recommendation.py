@@ -93,24 +93,3 @@ async def get_available_kinds(
     except Exception as e:
         logger.error(f"업종 목록 조회 실패: {str(e)}")
         raise HTTPException(status_code=500, detail=f"업종 목록 조회 실패: {str(e)}")
-
-@router.get("/card/{card_id}")
-async def get_card_details(
-    card_id: int = Path(..., description="카드 ID"),
-    db: Session = Depends(get_db),
-    card_service: CardService = Depends(get_card_service)
-):
-    """특정 카드의 상세 정보 조회"""
-    try:
-        card_details = await card_service.get_card_details(card_id, db)
-        
-        if not card_details:
-            raise HTTPException(status_code=404, detail="카드를 찾을 수 없습니다")
-        
-        return card_details
-        
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"카드 상세 조회 실패: {str(e)}")
-        raise HTTPException(status_code=500, detail=f"카드 상세 조회 실패: {str(e)}")
