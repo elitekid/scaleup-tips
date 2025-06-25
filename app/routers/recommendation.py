@@ -80,7 +80,7 @@ async def get_card_recommendations(
         logger.error(f"카드 추천 조회 실패: {str(e)}")
         raise HTTPException(status_code=500, detail=f"카드 추천 조회 실패: {str(e)}")
 
-@router.get("/kinds", response_model=List[str])
+@router.get("/kinds/list", response_model=List[str])
 async def get_available_kinds(
     db: Session = Depends(get_db),
     card_service: CardService = Depends(get_card_service)

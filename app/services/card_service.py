@@ -117,3 +117,14 @@ class CardService:
         except Exception as e:
             logger.error(f"업종 목록 조회 중 오류: {e}")
             raise
+            
+    def _extract_benefit_details(self, row) -> Dict[str, Any]:
+            """점수 상세 정보 추출"""
+            return {
+                "benefit_value_score": round(float(row.benefit_value_score), 4),
+                "convenience_score": round(float(row.convenience_score), 4),
+                "accessibility_score": round(float(row.accessibility_score), 4),
+                "category": row.profit_biz_cate_name,
+                "subcategory": row.profit_biz_kind_name,
+                "benefit_type": row.profit_type_name
+            }
