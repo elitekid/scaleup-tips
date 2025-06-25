@@ -87,23 +87,23 @@ GET /api/v1/card-recommendation/{profit_biz_kind_name}?limit=5
 **사용 예시:**
 ```bash
 # 편의점 추천 카드 조회 (각 타입별 5개씩)
-curl "http://localhost:8090/api/v1/card-recommendation/편의점?limit=5"
+curl "http://localhost:8090/api/v1/card-recommendation/세금?limit=5"
 
 # 주유소 추천 카드 조회 (각 타입별 3개씩)
-curl "http://localhost:8090/api/v1/card-recommendation/주유소?limit=3"
+curl "http://localhost:8090/api/v1/card-recommendation/주유?limit=3"
 ```
 
 **응답 예시:**
 ```json
 {
-  "profit_biz_kind_name": "편의점",
+  "profit_biz_kind_name": "세금",
   "discount_cards": {
     "benefit_type": "할인",
     "cards": [
       {
         "card_id": 1001,
         "profit_id": 2001,
-        "category_name": "편의점",
+        "category_name": "세금",
         "card_name": "카드 1001",
         "card_company": "카드사",
         "total_score": 0.8756,
@@ -124,7 +124,7 @@ curl "http://localhost:8090/api/v1/card-recommendation/주유소?limit=3"
       {
         "card_id": 1002,
         "profit_id": 2002,
-        "category_name": "편의점",
+        "category_name": "세금",
         "card_name": "카드 1002",
         "card_company": "카드사",
         "total_score": 0.8234,
@@ -151,8 +151,8 @@ GET /api/v1/card-recommendation/kinds
 **응답 예시:**
 ```json
 [
-  "편의점",
-  "주유소", 
+  "세금",
+  "주유", 
   "마트",
   "카페",
   "온라인쇼핑"
@@ -205,7 +205,7 @@ Docker 환경에서는 자동으로 `.env.develop` 설정이 적용됩니다.
 
 **업종 데이터 없음 (404 오류)**
 - 해당 업종의 카드 데이터가 ETL 처리되었는지 확인
-- `/api/v1/card-recommendation/kinds`로 이용 가능한 업종 목록 확인
+- `/api/v1/card-recommendation/kinds/list`로 이용 가능한 업종 목록 확인
 
 **환경 설정 오류**
 - ENV 환경변수가 올바르게 설정되었는지 확인
